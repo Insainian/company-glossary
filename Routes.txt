@@ -1,0 +1,6 @@
+glossary/
+glossary/search
+glossary/search?q=word
+glossary/definition/:word
+
+glossary/add
