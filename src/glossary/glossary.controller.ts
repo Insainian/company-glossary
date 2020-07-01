@@ -1,10 +1,11 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, Render } from '@nestjs/common';
 
 @Controller('glossary')
 export class GlossaryController {
     @Get()
-    searchField(): string {
-        return 'This is a search field';
+    @Render('glossary/glossary')
+    glossaryHome(){
+        return { message: 'Glossary home' };
     }
 
     @Get('search')
