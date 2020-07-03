@@ -1,0 +1,20 @@
+{{>base_layout}}
+
+{{#*inline "page_title"}}
+Search
+{{/inline}}
+
+{{#*inline "body"}}
+Results for "{{ query }}"":
+<ul>
+    {{#if definitions}}
+    {{#each definitions}}
+    <li>{{this.term}}
+        <p style="color: gray;">{{this.meaning}}</p>
+    </li>
+    {{/each}}
+    {{else}}
+    <div>No results found</div>
+    {{/if}}
+</ul>
+{{/inline}}
