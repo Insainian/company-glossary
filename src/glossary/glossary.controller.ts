@@ -1,17 +1,18 @@
-import { Controller, Get, Param, Query, Render } from '@nestjs/common';
+import { Controller, Get, Post, Param, Query, Render, Body, Redirect } from '@nestjs/common';
 import { SearchResults } from './SearchResults';
+import { Definition, DefinitionForm } from './Definition';
 
 @Controller('glossary')
 export class GlossaryController {
     @Get()
     @Render('glossary/glossary')
-    glossaryHome() {
+    getHomePage() {
         return { message: 'Glossary home' };
     }
 
     @Get('search')
     @Render('glossary/search')
-    search(@Query('q') q: string): SearchResults {
+    getSearchPage(@Query('q') q: string): SearchResults {
         return {
             query: q,
             definitions: [
@@ -31,13 +32,38 @@ export class GlossaryController {
         };
     }
 
-    @Get('definition/:id')
-    getDefinition(@Param() params): string {
-        return 'This is the definition of ' + params.id;
+    @Get('definition/:word')
+    @Render('glossary/show_definition')
+    getViewDefinitionPage(@Param() params): Definition {
+        return {
+            term:params.word,
+            meaning: 'Meaning of ' + params.word,
+            relatedTerms: ['1st term', '2nd term'],
+            links: [{
+                title: 'Google',
+                url: 'http://google.com'
+            }]
+        };
     }
 
     @Get('add')
-    addDefinition(): string {
-        return 'You can add things here';
+    @Render('glossary/add_definition')
+    getAddDefinitionPage() { }
+
+    @Post('add')
+    @Render('glossary/added_definition')
+    addDefinition(@Body() definition: DefinitionForm): Definition {
+        console.log(definition);
+        return {
+            term: definition.term,
+            meaning: definition.meaning,
+            relatedTerms: definition.relatedTerms.split(','),
+            links: definition.links.split(',').map((linkUrl) => {
+                return {
+                    title: '',
+                    url: linkUrl
+                }
+            })
+        };
     }
 }

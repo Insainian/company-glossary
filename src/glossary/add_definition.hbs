@@ -1,0 +1,19 @@
+{{>base_layout}}
+
+{{#*inline "page_title"}}
+Add Definition
+{{/inline}}
+
+{{#*inline "body"}}
+<form method="POST" action="/glossary/add">
+  <input type="text" name="term" />
+
+  <input type="text" name="meaning" />
+
+  <input type="text" name="relatedTerms" />
+
+  <input type="url" name="links" />
+
+  <input type="submit" />
+</form>
+{{/inline}}
