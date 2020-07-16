@@ -5,7 +5,13 @@ Search
 {{/inline}}
 
 {{#*inline "body"}}
-Results for "{{ query }}"":
+<form method="GET" action="/glossary/search">
+    <input type="search" name="q" />
+    <button type="submit">Search</button>
+</form>
+
+{{#if query}}
+Results for "{{ query }}":
 <ul>
     {{#if definitions}}
     {{#each definitions}}
@@ -17,4 +23,5 @@ Results for "{{ query }}"":
     <div>No results found</div>
     {{/if}}
 </ul>
+{{/if}}
 {{/inline}}

@@ -15,4 +15,22 @@ export class SearchService {
         return true
         // TODO: return success state of the index function
     }
+
+    async getDefinitionList(query: string): Promise<Definition[]> {
+        const { body } = await this.elasticsearchService.search({
+            index: 'glossary',
+            type: '_doc',
+            from: 0, size: 10,
+            body: {
+                query: {
+                    multi_match: {
+                        query,
+                        fields: ["term", "meaning"]
+                    }
+                }
+            }
+        })
+        const definitions = body.hits.hits.map(hit => hit._source)
+        return definitions
+    }
 }

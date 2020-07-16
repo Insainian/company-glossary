@@ -14,23 +14,10 @@ export class GlossaryController {
 
     @Get('search')
     @Render('glossary/search')
-    getSearchPage(@Query('q') q: string): SearchResults {
+    async getSearchPage(@Query('q') q: string): Promise<SearchResults> {
         return {
             query: q,
-            definitions: [
-                {
-                    term: 'OOP',
-                    meaning: 'Object Oriented Programming',
-                    relatedTerms: ['OOD'],
-                    links: []
-                },
-                {
-                    term: 'OOD',
-                    meaning: 'Object Oriented Design',
-                    relatedTerms: ['OOP'],
-                    links: []
-                }
-            ]
+            definitions: await this.searchService.getDefinitionList(q)
         }
     }
 
