@@ -1,8 +1,17 @@
 {{>base_layout}}
+
 {{#*inline "page_title"}}
+{{#if id}}
 Definition of {{ term }}
+{{else}}
+Not found
+{{/if}}
 {{/inline}}
 
 {{#*inline "body"}}
+{{#if id}}
 {{>definition_partial}}
+{{else}}
+Definition not found
+{{/if}}
 {{/inline}}

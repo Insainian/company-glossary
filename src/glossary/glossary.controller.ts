@@ -3,6 +3,7 @@ import { Definition, DefinitionForm } from './Definition'
 import { SearchResults } from './SearchResults'
 import { SearchService } from 'src/search/search.service'
 import { getDefaultSettings } from 'http2'
+import baseModule from 'hbs'
 
 @Controller('glossary')
 export class GlossaryController {

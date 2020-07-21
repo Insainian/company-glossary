@@ -40,15 +40,28 @@ export class SearchService {
         return definitions
     }
 
-    async getDefinition(id: string): Promise<Definition> {
-        if (id === undefined) return
-        const { body } = await this.elasticsearchService.get({
+    async getDefinition(id: string): Promise<Definition | undefined> {
+        if (id === undefined) return undefined
+        try {
+            const { body } = await this.elasticsearchService.get({
+                id: id,
+                index: 'glossary',
+                type: '_doc'
+            })
+            const definition = body._source
+            definition.id = body._id
+            return definition
+        } catch (error) {
+            console.log(error)
+            return undefined
+        }
+    }
+
+    deleteDefinition(id: string) {
+        this.elasticsearchService.delete({
             id: id,
             index: 'glossary',
             type: '_doc'
         })
-        const definition = body._source
-        definition.id = body._id
-        return definition
     }
 }
