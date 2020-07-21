@@ -17,10 +17,12 @@ export class SearchService {
     }
 
     async getDefinitionList(query: string): Promise<Definition[]> {
+        if (query === undefined) return []
         const { body } = await this.elasticsearchService.search({
             index: 'glossary',
             type: '_doc',
-            from: 0, size: 10,
+            from: 0,
+            size: 10,
             body: {
                 query: {
                     multi_match: {
@@ -30,7 +32,23 @@ export class SearchService {
                 }
             }
         })
-        const definitions = body.hits.hits.map(hit => hit._source)
+        const definitions = body.hits.hits.map(hit => {
+            const definition = hit._source
+            definition.id = hit._id
+            return definition
+        })
         return definitions
+    }
+
+    async getDefinition(id: string): Promise<Definition> {
+        if (id === undefined) return
+        const { body } = await this.elasticsearchService.get({
+            id: id,
+            index: 'glossary',
+            type: '_doc'
+        })
+        const definition = body._source
+        definition.id = body._id
+        return definition
     }
 }

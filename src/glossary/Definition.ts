@@ -8,6 +8,7 @@ export interface DefinitionForm {
 }
 
 export interface Definition {
+    id?: string
     term: string
     meaning: string
     relatedTerms: string[]

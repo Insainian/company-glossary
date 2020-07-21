@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post, Query, Render } from '@nestjs/commo
 import { Definition, DefinitionForm } from './Definition'
 import { SearchResults } from './SearchResults'
 import { SearchService } from 'src/search/search.service'
+import { getDefaultSettings } from 'http2'
 
 @Controller('glossary')
 export class GlossaryController {
@@ -21,20 +22,10 @@ export class GlossaryController {
         }
     }
 
-    @Get('definition/:word')
+    @Get('definition/:id')
     @Render('glossary/show_definition')
-    getViewDefinitionPage(@Param() params): Definition {
-        return {
-            term: params.word,
-            meaning: 'Meaning of ' + params.word,
-            relatedTerms: ['1st term', '2nd term'],
-            links: [
-                {
-                    title: 'Google',
-                    url: 'http://google.com'
-                }
-            ]
-        }
+    async getViewDefinitionPage(@Param() params): Promise<Definition> {
+        return this.searchService.getDefinition(params.id)
     }
 
     @Get('add')
