@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, Render, Delete } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Query, Render, Redirect } from '@nestjs/common'
 import { Definition, DefinitionForm } from './Definition'
 import { SearchResults } from './SearchResults'
 import { SearchService } from 'src/search/search.service'
@@ -9,10 +9,8 @@ import baseModule from 'hbs'
 export class GlossaryController {
     constructor(private readonly searchService: SearchService) { }
     @Get()
-    @Render('glossary/glossary')
-    getHomePage() {
-        return { message: 'Glossary home' }
-    }
+    @Redirect('glossary/search')
+    getHomePage() { }
 
     @Get('search')
     @Render('glossary/search')
