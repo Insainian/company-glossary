@@ -15,7 +15,7 @@ Results for "{{ query }}":
 <ul>
     {{#if definitions}}
     {{#each definitions}}
-    <li><a href="http://localhost:3000/glossary/definition/{{this.id}}">{{this.term}}</a>
+    <li><a href="/glossary/definition/{{this.id}}">{{this.term}}</a>
         <p style="color: gray;">{{this.meaning}}</p>
         <p style="color: chocolate;">{{this.id}}</p>
     </li>

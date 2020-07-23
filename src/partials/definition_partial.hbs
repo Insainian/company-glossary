@@ -9,7 +9,11 @@
 {{this}},
 {{/each}}
 
-<h2>Related Terms:</h2>
+<h2>Links:</h2>
 {{#each links}}
 {{>link_partial this}}
 {{/each}}
+
+<form method="POST" action="/glossary/definition/{{id}}/delete">
+    <button type="submit">Delete</button>
+</form>

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, Render } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Query, Render, Delete } from '@nestjs/common'
 import { Definition, DefinitionForm } from './Definition'
 import { SearchResults } from './SearchResults'
 import { SearchService } from 'src/search/search.service'
@@ -27,6 +27,13 @@ export class GlossaryController {
     @Render('glossary/show_definition')
     async getViewDefinitionPage(@Param() params): Promise<Definition> {
         return this.searchService.getDefinition(params.id)
+    }
+
+    @Post('definition/:id/delete')
+    @Render('glossary/deleted')
+    async deleteDefinition(@Param() params) {
+        this.searchService.deleteDefinition(params.id)
+        console.log("deleted")
     }
 
     @Get('add')
