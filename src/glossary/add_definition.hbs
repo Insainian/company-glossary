@@ -5,15 +5,40 @@ Add Definition
 {{/inline}}
 
 {{#*inline "body"}}
-<form method="POST" action="/glossary/add">
-  <input type="text" name="term" />
+<form class="form-horizontal lg:mr-56" method="POST" action="/glossary/add">
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="term">Term</label>
+    <div class="col-sm-10">
+      <input class="form-control" id="term" type="text" name="term" placeholder="Term" />
+    </div>
+  </div>
 
-  <input type="text" name="meaning" />
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="meaning">Definition</label>
+    <div class="col-sm-10">
+      <input class="form-control" id="meaning" type="text" name="meaning" placeholder="Definition" />
+    </div>
+  </div>
 
-  <input type="text" name="relatedTerms" />
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="relatedTerms">Relate Terms</label>
+    <div class="col-sm-10">
+      <input class="form-control" id="relatedTerms" type="text" name="relatedTerms" placeholder="Related Terms" />
+    </div>
+  </div>
 
-  <input type="url" name="links" />
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="url">Links</label>
+    <div class="col-sm-10">
+      <input class="form-control" id="url" type="url" name="links" placeholder="Links" />
+    </div>
+  </div>
 
-  <button type="submit">Add</button>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+  </div>
+
 </form>
 {{/inline}}

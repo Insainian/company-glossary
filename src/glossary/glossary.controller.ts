@@ -31,7 +31,6 @@ export class GlossaryController {
     @Render('glossary/deleted')
     async deleteDefinition(@Param() params) {
         this.searchService.deleteDefinition(params.id)
-        console.log("deleted")
     }
 
     @Get('add')
@@ -41,7 +40,6 @@ export class GlossaryController {
     @Post('add')
     @Render('glossary/added_definition')
     addDefinition(@Body() definitionForm: DefinitionForm): Definition {
-        console.log(definitionForm)
         const definition: Definition = {
             term: definitionForm.term,
             meaning: definitionForm.meaning,

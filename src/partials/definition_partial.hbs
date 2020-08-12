@@ -1,19 +1,34 @@
-<h2>Word/Phrase:</h2>
-{{term}}
+<div class="lg:flex lg:items-start m-4 text-left rounded-lg bg-white p-8 shadow-xl leading-loose">
+    <div class="lg:flex-1">
+        <h4 class="font-semibold text-5xl">{{term}}</h4>
+        <hr class="border-b-2 border-gray-200">
+        <h4 class="text-3xl">{{meaning}}</h4>
+    </div>
 
-<h2>Meaning:</h2>
-{{meaning}}
+    <div class="w-1/12">
+    </div>
 
-<h2>Related Terms:</h2>
-{{#each relatedTerms}}
-{{this}},
-{{/each}}
+    <div class="lg:flex-1 lg:text-left p-8">
+        <h4 class="text-xl font-bold">Related Terms:</h4>
+        <hr class="border-b-2 border-gray-200">
+        {{#each relatedTerms}}
+        <li>
+            <a href="/glossary/definition/{{this}}" class="text-blue-500">
+                {{this}}
+            </a>
+        </li>
+        {{/each}}
 
-<h2>Links:</h2>
-{{#each links}}
-{{>link_partial this}}
-{{/each}}
+        <h4 class="text-xl font-bold">Links:</h4>
+        <hr class="border-b-2 border-gray-200">
 
-<form method="POST" action="/glossary/definition/{{id}}/delete">
-    <button type="submit">Delete</button>
-</form>
+        {{#each links}}
+        {{>link_partial this}}
+        {{/each}}
+
+        <form method="POST" action="/glossary   /definition/{{id}}/delete">
+            <button type="button"
+                class="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 border border-red-900 rounded mt-3">Delete</button>
+        </form>
+    </div>
+</div>

@@ -52,7 +52,6 @@ export class SearchService {
             definition.id = body._id
             return definition
         } catch (error) {
-            console.log(error)
             return undefined
         }
     }

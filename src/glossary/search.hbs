@@ -5,24 +5,27 @@ Search
 {{/inline}}
 
 {{#*inline "body"}}
-<form method="GET" action="/glossary/search">
-    <input type="search" name="q" />
-    <button type="submit">Search</button>
-</form>
+<div class="form-group mx-auto">
+    <form method="GET" action="/glossary/search">
+        <input class="form-control w-full h-16 px-3 px-8" autofocus="autofocus" type="search" name="q"
+            placeholder="Search" />
+    </form>
+</div>
 
-{{#if query}}
-Results for "{{ query }}":
-<ul>
-    {{#if definitions}}
-    {{#each definitions}}
-    <li><a href="/glossary/definition/{{this.id}}">{{this.term}}</a>
-        <p style="color: gray;">{{this.meaning}}</p>
-        <p style="color: chocolate;">{{this.id}}</p>
-    </li>
-    {{/each}}
-    {{else}}
-    <div>No results found</div>
+<div class="font-sans">
+    {{#if query}}
+    <div class="lg:ml-auto">
+        <b>Results for "{{ query }}":</b>
+    </div>
+    <ul>
+        {{#if definitions}}
+        {{#each definitions}}
+        {{>definition_summary_partial this}}
+        {{/each}}
+        {{else}}
+        <div class="alert alert-info mt-8"><b>No results found</b></div>
+        {{/if}}
+    </ul>
     {{/if}}
-</ul>
-{{/if}}
-{{/inline}}
+    {{/inline}}
+</div>
