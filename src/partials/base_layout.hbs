@@ -36,6 +36,21 @@
                     <li><a href="/glossary/search">Search</a></li>
                     <li><a href="/glossary/add">Add Defintion </a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span class="flex flex-row items-center">
+                                <img src={{user.picture}} alt="Profile Picture" style="height: 32px" class="img-circle">
+                                <span class="ml-2">{{user.name}}</span>
+                                <span class="caret"></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/google/logout">Logout</a></li>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

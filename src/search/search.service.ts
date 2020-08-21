@@ -56,8 +56,8 @@ export class SearchService {
         }
     }
 
-    deleteDefinition(id: string) {
-        this.elasticsearchService.delete({
+    async deleteDefinition(id: string) {
+        await this.elasticsearchService.delete({
             id: id,
             index: 'glossary',
             type: '_doc'
