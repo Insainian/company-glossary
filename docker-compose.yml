@@ -36,6 +36,4 @@ services:
       - 9300:9300
 volumes:
   data01:
-    driver: local
-      
-  
+    driver: local  

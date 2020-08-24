@@ -18,26 +18,31 @@ export class SearchService {
 
     async getDefinitionList(query: string): Promise<Definition[]> {
         if (query === undefined) return []
-        const { body } = await this.elasticsearchService.search({
-            index: 'glossary',
-            type: '_doc',
-            from: 0,
-            size: 10,
-            body: {
-                query: {
-                    multi_match: {
-                        query,
-                        fields: ["term", "meaning"]
+        try {
+            const { body } = await this.elasticsearchService.search({
+                index: 'glossary',
+                type: '_doc',
+                from: 0,
+                size: 10,
+                body: {
+                    query: {
+                        multi_match: {
+                            query,
+                            fields: ["term", "meaning"]
+                        }
                     }
                 }
-            }
-        })
-        const definitions = body.hits.hits.map(hit => {
-            const definition = hit._source
-            definition.id = hit._id
-            return definition
-        })
-        return definitions
+            })
+            const definitions = body.hits.hits.map(hit => {
+                const definition = hit._source
+                definition.id = hit._id
+                return definition
+            })
+            return definitions
+        }
+        catch (error) {
+            return []
+        }
     }
 
     async getDefinition(id: string): Promise<Definition | undefined> {
