@@ -28,9 +28,8 @@ export class GlossaryController {
     constructor(private readonly searchService: SearchService, private readonly googleService: GoogleService) { }
 
     @Get()
-    getHomePage() {
-        return 'WELCOME'
-    }
+    @Render('glossary/glossary')
+    getHomePage() { }
 
     @Get('search')
     @UseGuards(AuthenticatedGuard)

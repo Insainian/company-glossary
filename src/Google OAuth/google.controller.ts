@@ -20,6 +20,6 @@ export class GoogleController {
     @Get('logout')
     logout(@Request() req, @Res() res: Response) {
         req.logout()
-        res.redirect('login')
+        res.redirect('/glossary')
     }
 }
