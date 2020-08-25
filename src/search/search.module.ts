@@ -4,7 +4,7 @@ import { ElasticsearchModule } from '@nestjs/elasticsearch'
 
 @Module({
   imports: [ElasticsearchModule.register({
-    node: 'http://elasticsearch:9200',
+    node: `http://${process.env.ELASTICSEARCH_HOST || 'localhost'}:9200`,
   })],
   providers: [SearchService],
   exports: [SearchService]
