@@ -11,6 +11,7 @@ interface UserProfile {
     picture: string
 }
 
+type Result = { success: boolean }
 type User = { user: UserProfile }
 
 function getUser(req: any): User {
@@ -71,7 +72,7 @@ export class GlossaryController {
     @Post('add')
     @UseGuards(AuthenticatedGuard)
     @Render('glossary/added_definition')
-    addDefinition(@Request() req, @Body() definitionForm: DefinitionForm): Definition & User {
+    async addDefinition(@Request() req, @Body() definitionForm: DefinitionForm): Promise<Result & Definition & User> {
         const definition: Definition = {
             term: definitionForm.term,
             meaning: definitionForm.meaning,
@@ -83,8 +84,8 @@ export class GlossaryController {
                 }
             })
         }
-        this.searchService.addDefinition(definition)
         return {
+            success: await this.searchService.addDefinition(definition),
             ...getUser(req),
             ...definition
         }

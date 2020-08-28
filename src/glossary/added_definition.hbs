@@ -5,6 +5,10 @@ Added
 {{/inline}}
 
 {{#*inline "body"}}
+{{#if success}}
 <div class="alert alert-info" role="alert">Added</div>
 {{>definition_partial}}
+{{else}}
+<div class="alert alert-danger" role="alert">Not Added</div>
+{{/if}}
 {{/inline}}

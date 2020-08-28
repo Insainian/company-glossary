@@ -7,13 +7,17 @@ export class SearchService {
     constructor(private readonly elasticsearchService: ElasticsearchService) { }
 
     async addDefinition(definition: Definition): Promise<boolean> {
-        await this.elasticsearchService.index({
-            index: 'glossary',
-            type: '_doc',
-            body: definition
-        })
-        return true
-        // TODO: return success state of the index function
+        try {
+            await this.elasticsearchService.index({
+                index: 'glossary',
+                type: '_doc',
+                body: definition
+            })
+            return true
+        }
+        catch (error) {
+            return false
+        }
     }
 
     async getDefinitionList(query: string): Promise<Definition[]> {
