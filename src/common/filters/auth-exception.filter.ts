@@ -19,7 +19,7 @@ export class AuthExceptionFilter implements ExceptionFilter {
             exception instanceof UnauthorizedException ||
             exception instanceof ForbiddenException
         ) {
-            response.redirect('/google/login')
+            response.redirect('/glossary')
         } else {
             response.redirect('/error')
         }
