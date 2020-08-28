@@ -1,6 +1,5 @@
 import { Controller, Get, Post, Request, Req, UseGuards, Redirect, Res } from '@nestjs/common'
 import { GoogleService } from './google.service'
-import { AuthGuard } from '@nestjs/passport'
 import { Response } from 'express'
 
 import { GoogleLoginGuard } from '../common/guards/google-login.guard'
