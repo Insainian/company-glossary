@@ -1,34 +1,39 @@
-<div class="lg:flex lg:items-start m-4 text-left rounded-lg bg-white p-8 shadow-xl leading-loose">
-    <div class="lg:flex-1">
-        <h4 class="font-semibold text-5xl">{{term}}</h4>
-        <hr class="border-b-2 border-gray-200">
-        <h4 class="text-3xl">{{meaning}}</h4>
-    </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title" />{{term}}</h1>
+            </div>
+            <div class="panel-body">
+                <p>{{meaning}}</p>
+                <span class="flex flex-row">
+                    <img src={{author.picture}} alt="Author Picture" style="height: 32px" class="img-circle">
+                    <span class="ml-2 mt-3">{{author.email}}</span>
+                </span>
+            </div>
 
-    <div class="w-1/12">
-    </div>
 
-    <div class="lg:flex-1 lg:text-left p-8">
-        <h4 class="text-xl font-bold">Related Terms:</h4>
-        <hr class="border-b-2 border-gray-200">
-        {{#each relatedTerms}}
-        <li>
-            <a href="/glossary/definition/{{this}}" class="text-blue-500">
-                {{this}}
-            </a>
-        </li>
-        {{/each}}
+            <div class="panel-footer">
+                <h5>Related Terms:</h5>
+                {{#each relatedTerms}}
+                <li>
+                    <a href="/glossary/definition/{{this}}">
+                        {{this}}
+                    </a>
+                </li>
+                {{/each}}
 
-        <h4 class="text-xl font-bold">Links:</h4>
-        <hr class="border-b-2 border-gray-200">
+                <h5>Links:</h5>
+                {{#each links}}
+                {{>link_partial this}}
+                {{/each}}
 
-        {{#each links}}
-        {{>link_partial this}}
-        {{/each}}
-
-        <form method="POST" action="/glossary   /definition/{{id}}/delete">
-            <button type="button"
-                class="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 border border-red-900 rounded mt-3">Delete</button>
-        </form>
+                {{#ifEquals user.email author.email}}
+                <form method="POST" action="/glossary/definition/{{id}}/delete">
+                    <button class="btn btn-primary mt-8">Delete</button>
+                </form>
+                {{/ifEquals}}
+            </div>
+        </div>
     </div>
 </div>
