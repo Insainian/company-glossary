@@ -1,4 +1,5 @@
 import { Link } from './Link'
+import { UserProfile } from './UserProfile'
 
 export interface DefinitionForm {
     term: string
@@ -9,6 +10,7 @@ export interface DefinitionForm {
 
 export interface Definition {
     id?: string
+    author: UserProfile
     term: string
     meaning: string
     relatedTerms: string[]

@@ -5,21 +5,22 @@ import { SearchResults } from './SearchResults'
 import { SearchService } from 'src/search/search.service'
 import { AuthenticatedGuard } from '../common/guards/authenticated.guard'
 import { AuthExceptionFilter } from 'src/common/filters/auth-exception.filter'
-
-interface UserProfile {
-    name: string,
-    picture: string
-}
+import { UserProfile } from './UserProfile'
 
 type Result = { success: boolean }
 type User = { user: UserProfile }
 
 function getUser(req: any): User {
     return {
-        user: {
-            name: req.user.displayName || req.user.email,
-            picture: req.user.picture
-        }
+        user: getUserProfile(req)
+    }
+}
+
+function getUserProfile(req: any): UserProfile {
+    return {
+        name: req.user.displayName || req.user.email,
+        email: req.user.email,
+        picture: req.user.picture
     }
 }
 
@@ -74,6 +75,7 @@ export class GlossaryController {
     @Render('glossary/added_definition')
     async addDefinition(@Request() req, @Body() definitionForm: DefinitionForm): Promise<Result & Definition & User> {
         const definition: Definition = {
+            author: getUserProfile(req),
             term: definitionForm.term,
             meaning: definitionForm.meaning,
             relatedTerms: definitionForm.relatedTerms.split(',').map(term => term.trim()),
